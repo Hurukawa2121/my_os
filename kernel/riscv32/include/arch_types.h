@@ -18,6 +18,21 @@ struct arch_vm {
     paddr_t table;  // ページテーブルの物理アドレス (Sv32)
 };
 
+
+// RISC-V特有のCPUローカル変数。順番を変える時はasmdefs.hで定義しているマクロも更新する。
+struct arch_cpuvar {
+    uint32_t sscratch;  // 変数の一時保管場所
+    uint32_t sp_top;    // 実行中タスクのカーネルスタックの上端
+
+    // タイマー割り込みハンドラ (M-mode) で使用。
+    uint32_t mscratch0;   // 変数の一時保管場所
+    uint32_t mscratch1;   // 変数の一時保管場所その2
+    paddr_t mtimecmp;     // MTIMECMPのアドレス
+    paddr_t mtime;        // MTIMEのアドレス
+    uint32_t interval;    // MTIMECMPに加算していく値
+    uint64_t last_mtime;  // 直前のmtimeの値
+};
+
 // CPUVARマクロの中身。現在のCPUローカル変数のアドレスを返す。
 static inline struct cpuvar *arch_cpuvar_get(void) {
     // tpレジスタにCPUローカル変数のアドレスが格納されている。
