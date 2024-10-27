@@ -1,4 +1,5 @@
 #pragma once
+#include "buildconfig.h"
 
 typedef char int8_t;                  //  8ビット符号付き整数型
 typedef short int16_t;                // 16ビット符号付き整数型
@@ -9,7 +10,7 @@ typedef unsigned short uint16_t;      // 16ビット符号なし整数型
 typedef unsigned uint32_t;            // 32ビット符号なし整数型
 typedef unsigned long long uint64_t;  // 64ビット符号なし整数型
 
-// #if !defined(__LP64__)
+#if !defined(__LP64__) // 64 ビットのコンパイル・モードが有効なら
 // intの最大値
 #    define INT_MAX 2147483647
 // unsigned intの最大値
@@ -18,7 +19,7 @@ typedef unsigned long long uint64_t;  // 64ビット符号なし整数型
 typedef int32_t intmax_t;
 // 符号なし整数型の最大値
 typedef uint32_t uintmax_t;
-// #endif
+#endif
 
 // 真偽値
 typedef char bool;
