@@ -1,5 +1,24 @@
+#pragma once
+#include "arch.h"
+#include "hinavm.h"
+#include "interrupt.h"
+#include <libs/common/list.h>
+#include <libs/common/message.h>
+#include <libs/common/types.h>
 
+// タスクの最大連続実行時間
+#define TASK_QUANTUM (20 * (TICK_HZ / 1000)) /* 20ミリ秒 */
 
+// 現在のCPUのアイドルタスク (struct task *)
+// 無限ループで割り込みを待ってもいいが、CPU実行の電力が無駄になる
+#define IDLE_TASK (arch_cpuvar_get()->idle_task)
+// 実行中タスク (struct task *)
+#define CURRENT_TASK (arch_cpuvar_get()->current_task)
+
+// タスクの状態
+#define TASK_UNUSED   0
+#define TASK_RUNNABLE 1
+#define TASK_BLOCKED  2
 
 // タスク管理構造体
 struct task {
