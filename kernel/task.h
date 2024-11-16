@@ -10,6 +10,7 @@
 #define TASK_QUANTUM (20 * (TICK_HZ / 1000)) /* 20ミリ秒 */
 
 // 現在のCPUのアイドルタスク (struct task *)
+// 無限ループで割り込みを待ってもいいが、CPU実行の電力が無駄になる
 #define IDLE_TASK (arch_cpuvar_get()->idle_task)
 // 実行中タスク (struct task *)
 #define CURRENT_TASK (arch_cpuvar_get()->current_task)

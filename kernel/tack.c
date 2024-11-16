@@ -25,6 +25,8 @@ static struct task *scheduler(void) {
 // 自発的なタスク切り替えを行う。もし実行可能なタスクが実行中タスク以外にない場合は、即座に
 // 戻ってくる。その他の場合は、他のタスクに実行が移され、次回タスクが再びスケジュールされたとき
 // に戻ってくる。
+// Bennoスケジューリング（実行可能タスクのみ入れる = CURRENT_TASKは「返信待ちで実行できない状態のタスク」の可能性があるので含まない。
+//                   実行可能だけじゃない曖昧な状態だとLazyスケジューリングする必要があり、タスク数に比例して時間がかかる。)
 void task_switch(void) {
     struct task *prev = CURRENT_TASK;  // 実行中タスク
     struct task *next = scheduler();   // 次に実行するタスク
