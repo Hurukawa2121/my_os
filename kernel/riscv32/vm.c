@@ -55,6 +55,7 @@ static error_t walk(paddr_t base, vaddr_t vaddr, bool alloc, pte_t **pte) {
     pte_t *l2table = (pte_t *) arch_paddr_to_vaddr(PTE_PADDR(l1table[index]));
     // vaddrのページテーブルエントリへのポインタ
     // ページテーブルの階層レベルは0(最下位レベル)
+    // 2段目のINDEX(PTE_INDEX(0, vaddr))を求めて、総合的なpteのアドレスを返す
     *pte = &l2table[PTE_INDEX(0, vaddr)];
     return OK;
 }
