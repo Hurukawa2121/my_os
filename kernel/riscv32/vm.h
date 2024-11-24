@@ -11,6 +11,7 @@
 #define PTE_X (1 << 3)
 #define PTE_U (1 << 4)
 
+// ページテーブルエントリ（PTE）
 typedef uint32_t pte_t;
 
 extern char __text[];
