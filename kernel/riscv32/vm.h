@@ -2,6 +2,7 @@
 #include <libs/common/types.h>
 
 #define PTE_PADDR_MASK          0xfffffc00
+// ページエントリのサイズは10ビット(0x3ff=0b1111111111)
 #define PTE_INDEX(level, vaddr) (((vaddr) >> (12 + (level) *10)) & 0x3ff)
 // pteは1段目のINDEX。>>10で2段目にし、<<12でページ内オフセット分を上げる
 #define PTE_PADDR(pte)          (((pte) >> 10) << 12)
